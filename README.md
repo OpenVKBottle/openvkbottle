@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/cynexeso/openvkbottle">
-    <img width="150px" height="150px" alt="openvkbottle" src="https://raw.githubusercontent.com/cynexeso/openvkbottle/master/docs/logo.svg">
+  <a href="https://github.com/openvkbottle/openvkbottle">
+    <img width="150px" height="150px" alt="openvkbottle" src="https://raw.githubusercontent.com/openvkbottle/openvkbottle/master/docs/logo.svg">
   </a>
 </p>
 <h1 align="center">
