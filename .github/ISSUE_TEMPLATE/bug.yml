@@ -1,0 +1,42 @@
+name: Сообщение об ошибке
+description: Сообщение о произошедшем баге во время работы с фреймворком
+labels: ["bug"]
+assignees: ["luwqz1"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: Я уверен(а), что это баг фреймворка
+          required: true
+        - label: Я искал(а) похожие баги в issues
+          required: true
+        - label: Я установил(а) последнюю версию (`pip3 install -U https://github.com/openvkbottle/openvkbottle/archive/dev.zip`) и проблема осталась
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Описание
+      description: Опишите баг
+      placeholder: |
+        Когда я ..., происходит ...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Пример кода
+      description: Предоставьте минимальный пример кода, который вызывает баг
+      placeholder: |
+        from openvkbottle.bot import Bot, Message
+        ...
+      render: python3
+
+  - type: textarea
+    attributes:
+      label: Логи
+      description: Предоставьте логи, если они есть
+      placeholder: |
+        Traceback (most recent call last):
+        File "main.py", line 1, in <module>
+        ...

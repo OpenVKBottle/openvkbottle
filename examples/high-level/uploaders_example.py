@@ -1,0 +1,38 @@
+import os
+
+from openvkbottle.bot import Bot, Message
+from openvkbottle.tools import DocMessagesUploader, PhotoMessageUploader
+
+# Load token from system environment variable
+# https://12factor.net/config
+bot = Bot(os.environ["TOKEN"])
+doc_uploader = DocMessagesUploader(bot.api)
+photo_uploader = PhotoMessageUploader(bot.api)
+
+
+# already uploaded picture
+@bot.on.message(command="ларс")
+async def lars_handler(m: Message):
+    await m.answer(attachment="photo-41629685_457239401")
+
+
+# on-handler processing upload
+@bot.on.message(command="ридми")
+async def readme_handler(m: Message):
+    doc = await doc_uploader.upload(
+        file_source="../../README.md",
+        peer_id=m.peer_id,
+    )
+    await m.answer(attachment=doc)
+
+
+@bot.on.message(command="лого")
+async def logo_handler(m: Message):
+    photo = await photo_uploader.upload(
+        file_source="../../docs/logo.png",
+        peer_id=m.peer_id,
+    )
+    await m.answer(attachment=photo)
+
+
+bot.run()

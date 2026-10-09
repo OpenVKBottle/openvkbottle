@@ -1,0 +1,61 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+        stages: [pre-commit, pre-push]
+      - id: check-ast
+        stages: [pre-commit]
+      - id: trailing-whitespace
+        stages: [pre-commit]
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+
+  - repo: local
+    hooks:
+      - id: ruff (isort)
+        name: ruff-isort
+        entry: poetry run ruff check --select I --select F401 --fix
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: ruff (sortall)
+        name: ruff-sortall
+        description: poetry run ruff check --select RUF022 --fix
+        entry: poetry run ruff check --select RUF022 --fix
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: ruff (format)
+        name: ruff-format
+        entry: poetry run ruff format
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: ruff
+        name: ruff check
+        entry: poetry run ruff check
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: mypy
+        name: mypy check
+        entry: poetry run mypy
+        language: system
+        types: [python]
+        # mypy must run as a single process: pre-commit otherwise splits the files
+        # into parallel chunks that share one .mypy_cache, and the concurrent cache
+        # writes intermittently corrupt it -> tracebackless "INTERNAL ERROR".
+        require_serial: true
+        stages: [pre-commit]
+
+      - id: pytest
+        name: pytest
+        entry: poetry run pytest
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
